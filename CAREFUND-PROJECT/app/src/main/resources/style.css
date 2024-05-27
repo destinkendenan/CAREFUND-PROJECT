@@ -1,0 +1,54 @@
+/* Gaya Umum */
+.root {
+    -fx-background-color: #f0f0f0; /* Warna latar belakang abu-abu muda */
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Jenis font */
+}
+
+/* Gaya untuk Scene */
+.scene {
+    -fx-padding: 20px;
+}
+
+/* Gaya untuk Tombol */
+.button {
+    -fx-background-color: #007bff; /* Warna biru primer */
+    -fx-text-fill: white;
+    -fx-padding: 10px 20px;
+    -fx-border: none;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #0069d9; /* Warna biru lebih gelap saat dihover */
+}
+
+.button:focused {
+    -fx-ring-width: 2px;
+    -fx-ring-color: #0062cc; /* Warna biru lebih gelap saat fokus */
+}
+
+/* Gaya untuk Label */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+/* Gaya untuk TextField dan PasswordField */
+.text-field, .password-field {
+    -fx-background-color: white;
+    -fx-padding: 8px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #007bff; /* Warna biru primer saat fokus */
+}
+
+/* Gaya untuk GridPane */
+.grid-pane {
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+}
