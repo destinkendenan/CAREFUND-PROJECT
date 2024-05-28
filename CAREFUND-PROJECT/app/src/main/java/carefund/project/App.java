@@ -3,6 +3,7 @@
  */
 package carefund.project;
 
+import carefund.project.controller.CarefundController;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class App extends Application {
 
     private Stage primaryStage;
     private Scene homeScene, loginScene, registerScene, mainScene, donationScene, profileScene, historyScene;
+    CarefundController cf = new CarefundController();
 
     @Override
     public void start(Stage primaryStage) {
@@ -87,7 +89,7 @@ public class App extends Application {
             String username = usernameField.getText();
             String password = passwordField.getText();
 
-            if (isValidCredentials(username, password)) {
+            if (cf.login(username, password)) {
                 primaryStage.setScene(mainScene); // Arahkan ke mainScene jika login valid
             } else {
                 // Tampilkan pesan error (misalnya, menggunakan Alert)
@@ -117,20 +119,20 @@ public class App extends Application {
     }
 
     // Metode untuk validasi kredensial
-    private boolean isValidCredentials(String username, String password) {
-        try (BufferedReader br = new BufferedReader(new FileReader("users.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts[0].equals(username) && parts[1].equals(password)) {
-                    return true; // Login valid
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false; // Login tidak valid
-    }
+    // private boolean isValidCredentials(String username, String password) {
+    //     try (BufferedReader br = new BufferedReader(new FileReader("users.txt"))) {
+    //         String line;
+    //         while ((line = br.readLine()) != null) {
+    //             String[] parts = line.split(",");
+    //             if (parts[0].equals(username) && parts[1].equals(password)) {
+    //                 return true; // Login valid
+    //             }
+    //         }
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    //     return false; // Login tidak valid
+    // }
 
     private void createRegisterScene() {
         Label usernameLabel = new Label("Username:");
@@ -166,6 +168,7 @@ public class App extends Application {
             if (!email.matches(emailRegex)) {
                 return;
             }
+            cf.register(usernameField.getText(), emailField.getText(), passwordField.getText());
             primaryStage.setScene(loginScene);
         });
 
