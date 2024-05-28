@@ -160,12 +160,30 @@ public class App extends Application {
             String username = usernameField.getText();
             String email = emailField.getText();
             String password = passwordField.getText();
-
+            
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Register Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Input is empty");
+                alert.showAndWait();
                 return;
             }
-            String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+            if (cf.cekUser(username)) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Register Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Username already exists");
+                alert.showAndWait();
+                return;
+            }
+            String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
             if (!email.matches(emailRegex)) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Register Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Invalid email");
+                alert.showAndWait();
                 return;
             }
             cf.register(usernameField.getText(), emailField.getText(), passwordField.getText());

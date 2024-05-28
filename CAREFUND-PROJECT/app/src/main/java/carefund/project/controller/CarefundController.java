@@ -61,6 +61,19 @@ public class CarefundController {
         }
     }
 
+    public boolean cekUser(String username) {
+        String sql = "SELECT username FROM user WHERE username = ?";
+        try (Connection conn = DatabaseConnection.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+           e.printStackTrace();
+           return false;
+        }
+    }
+
     public void register(String username, String email, String password) {
         createUserTable();
         String sql = "INSERT INTO user(username, email, password) VALUES(?, ?, ?)";
