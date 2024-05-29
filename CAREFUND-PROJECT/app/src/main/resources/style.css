@@ -85,17 +85,17 @@
     -fx-border-radius: 3px;
 }
 
-/* RadioButton Styles */
+
 .radio-button {
     -fx-font-family: "Comic Sans MS";
 }
 .history-table {
     -fx-background-color: white;
-    -fx-table-cell-border-color: black; /* Optional, for a cleaner look */
+    -fx-table-cell-border-color: black;
 }
 
 .history-table .column-header {
-    -fx-background-color: #000000; /* Or any color you prefer */
+    -fx-background-color: #000000;
     -fx-text-fill: white;
     -fx-font-family: "Comic Sans MS";
 }
