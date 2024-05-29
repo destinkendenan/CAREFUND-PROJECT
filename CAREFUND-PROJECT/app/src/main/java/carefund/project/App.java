@@ -260,11 +260,14 @@ public class App extends Application {
         kartuKreditButton.setToggleGroup(metodeGroup);
         transferButton.setSelected(true);
 
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> primaryStage.setScene(mainScene));
         // Button to confirm donation
         Button donateButton = new Button("Donasi");
         donateButton.setOnAction(e -> {
             String yayasan = yayasanComboBox.getValue();
-            String nominal = nominalField.getText();
+            String nominalText = nominalField.getText();
+            double nominal = Double.parseDouble(nominalText);
             RadioButton selectedMetode = (RadioButton) metodeGroup.getSelectedToggle();
             String metode = selectedMetode.getText();
 
@@ -284,6 +287,7 @@ public class App extends Application {
         nominalField.getStyleClass().add("text-field");
         metodeLabel.getStyleClass().add("label");
         donateButton.getStyleClass().add("button");
+        backButton.getStyleClass().add("button");
 
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -300,6 +304,7 @@ public class App extends Application {
         grid.add(transferButton, 1, 2);
         grid.add(eWalletButton, 1, 3);
         grid.add(kartuKreditButton, 1, 4);
+        grid.add(backButton, 0, 6);
         grid.add(donateButton, 1, 5);
 
         donationScene = new Scene(grid, 400, 350);

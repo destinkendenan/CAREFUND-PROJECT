@@ -32,10 +32,9 @@ public class CarefundController {
 
     public void createHistoryTable() {
         String sql = "CREATE TABLE IF NOT EXISTS history (" 
-            + " nominal REAL NOT NULL," 
-            + " tujuan TEXT NOT NULL" 
-            + " tanggal TEXT NOT NULL"
-            + " waktu TEXT NOT NULL," 
+                + " yayasan TEXT NOT NULL," 
+                + " nominal REAL NOT NULL," 
+                + " metode TEXT NOT NULL" 
                 + ");";
         try (Connection conn = DatabaseConnection.connect();
             Statement stmt = conn.createStatement()) {
@@ -69,8 +68,8 @@ public class CarefundController {
             ResultSet rs = pstmt.executeQuery();
             return rs.next();
         } catch (SQLException e) {
-           e.printStackTrace();
-           return false;
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -89,15 +88,14 @@ public class CarefundController {
         }
     }
 
-    public void insertHistory(double nominal, String tujuan, String tanggal, String waktu) {
-        createUserTable();
-        String sql = "INSERT INTO history(nominal, tujuan, tanggal, waktu) VALUES(?, ?, ?, ?)";
+    public void donate(String yayasan, double nominal, String metode) {
+        createHistoryTable();
+        String sql = "INSERT INTO history(yayasan, nominal, metode) VALUES(?, ?, ?)";
         try (Connection conn = DatabaseConnection.connect();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
-            pstmt.setDouble(1, nominal);
-            pstmt.setString(2, tujuan);
-            pstmt.setString(3, tanggal);
-            pstmt.setString(3, waktu);
+            pstmt.setString(1, yayasan);
+            pstmt.setDouble(2, nominal);
+            pstmt.setString(3, metode);
             pstmt.executeUpdate();
             System.out.println("Data history berhasil ditambahkan.");
         } catch (SQLException e) {
