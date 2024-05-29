@@ -9,7 +9,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Scene; 
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -19,6 +19,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 
 public class App extends Application {
 
@@ -163,7 +166,7 @@ public class App extends Application {
             String username = usernameField.getText();
             String email = emailField.getText();
             String password = passwordField.getText();
-            
+
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Alert alert = new Alert(AlertType.ERROR);
                 alert.setTitle("Register Error");
@@ -231,12 +234,75 @@ public class App extends Application {
     }
 
     private void createDonationScene() {
-        Label donationLabel = new Label("Donation Scene");
-        donationLabel.getStyleClass().add("label");
+        // Labels
+        Label yayasanLabel = new Label("Pilih Yayasan:");
+        Label nominalLabel = new Label("Nominal Donasi:");
+        Label metodeLabel = new Label("Metode Pembayaran:");
 
-        VBox layout = new VBox(20, donationLabel);
-        layout.setAlignment(Pos.CENTER);
-        donationScene = new Scene(layout, 300, 250);
+        ComboBox<String> yayasanComboBox = new ComboBox<>();
+        yayasanComboBox.getItems().addAll(
+                "Yayasan A", "Yayasan B", "Yayasan C", "Yayasan Lainnya");
+        yayasanComboBox.getSelectionModel().selectFirst();
+
+        TextField nominalField = new TextField();
+        nominalField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                nominalField.setText(oldValue);
+            }
+        });
+
+        RadioButton transferButton = new RadioButton("Transfer Bank");
+        RadioButton eWalletButton = new RadioButton("E-Wallet");
+        RadioButton kartuKreditButton = new RadioButton("Kartu Kredit");
+        ToggleGroup metodeGroup = new ToggleGroup();
+        transferButton.setToggleGroup(metodeGroup);
+        eWalletButton.setToggleGroup(metodeGroup);
+        kartuKreditButton.setToggleGroup(metodeGroup);
+        transferButton.setSelected(true);
+
+        // Button to confirm donation
+        Button donateButton = new Button("Donasi");
+        donateButton.setOnAction(e -> {
+            String yayasan = yayasanComboBox.getValue();
+            String nominal = nominalField.getText();
+            RadioButton selectedMetode = (RadioButton) metodeGroup.getSelectedToggle();
+            String metode = selectedMetode.getText();
+
+            // logika untuk donation confirmation (call a controller method, display
+            // confirmation alert)
+            cf.donate(yayasan, nominal, metode);
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Donasi Berhasil");
+            alert.setHeaderText(null);
+            alert.setContentText("Terima kasih atas donasi Anda!");
+            alert.showAndWait();
+        });
+
+        yayasanLabel.getStyleClass().add("label");
+        yayasanComboBox.getStyleClass().add("combo-box");
+        nominalLabel.getStyleClass().add("label");
+        nominalField.getStyleClass().add("text-field");
+        metodeLabel.getStyleClass().add("label");
+        donateButton.getStyleClass().add("button");
+
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.getStyleClass().add("grid-pane");
+
+        grid.add(yayasanLabel, 0, 0);
+        grid.add(yayasanComboBox, 1, 0);
+        grid.add(nominalLabel, 0, 1);
+        grid.add(nominalField, 1, 1);
+        grid.add(metodeLabel, 0, 2);
+        grid.add(transferButton, 1, 2);
+        grid.add(eWalletButton, 1, 3);
+        grid.add(kartuKreditButton, 1, 4);
+        grid.add(donateButton, 1, 5);
+
+        donationScene = new Scene(grid, 400, 350);
     }
 
     private void createProfileScene() {
