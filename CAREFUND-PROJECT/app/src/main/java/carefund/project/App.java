@@ -2,10 +2,6 @@ package carefund.project;
 
 import carefund.project.controller.CarefundController;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -138,22 +134,6 @@ public class App extends Application {
         grid.add(backButton, 0, 2);
 
         loginScene = new Scene(grid, 300, 250);
-    }
-
-    // Metode untuk validasi kredensial
-    private boolean isValidCredentials(String username, String password) {
-        try (BufferedReader br = new BufferedReader(new FileReader("users.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts[0].equals(username) && parts[1].equals(password)) {
-                    return true; // Login valid
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false; // Login tidak valid
     }
 
     private void createRegisterScene() {

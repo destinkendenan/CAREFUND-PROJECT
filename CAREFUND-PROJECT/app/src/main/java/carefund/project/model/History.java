@@ -3,15 +3,13 @@ package carefund.project.model;
 public class History {
     
     private double nominal;
-    private String tujuan;
-    private String tanggal;
-    private String waktu;
+    private String yayasan;
+    private String metode;
 
-    public History(double nominal, String tujuan, String tanggal, String waktu) {
+    public History(String yayasan, double nominal, String metode) {
+        this.yayasan = yayasan;
         this.nominal = nominal;
-        this.tujuan = tujuan;
-        this.tanggal = tanggal;
-        this.waktu = waktu;
+        this.metode = metode;
     }
 
     public void setNominal(double nominal) {
@@ -22,27 +20,19 @@ public class History {
         return nominal;
     }
 
-    public void setTujuan(String tujuan) {
-        this.tujuan = tujuan;
+    public void setYayasan(String yayasan) {
+        this.yayasan = yayasan;
     }
 
-    public String getTujuan() {
-        return tujuan;
+    public String getYayasan() {
+        return yayasan;
     }
 
-    public void setTanggal(String tanggal) {
-        this.tanggal = tanggal;
+    public void setMetode(String metode) {
+        this.metode = metode;
     }
 
-    public String getTanggal() {
-        return tanggal;
-    }
-
-    public void setWaktu(String waktu) {
-        this.waktu = waktu;
-    }
-
-    public String getWaktu() {
-        return waktu;
+    public String getMetode() {
+        return metode;
     }
 }

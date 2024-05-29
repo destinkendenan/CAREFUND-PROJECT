@@ -1,10 +1,10 @@
 package carefund.project.controller;
 
 import carefund.project.config.DatabaseConnection;
-// import carefund.project.model.History;
+import carefund.project.model.History;
 // import carefund.project.model.User;
-// import javafx.collections.FXCollections;
-// import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -125,28 +125,27 @@ public class CarefundController {
     //     return data;
     // }
 
-    // public ObservableList<History> selectAll2() {
-    //     String sql = "SELECT nominal, tujuan, tanggal, waktu FROM history";
-    //     ObservableList<History> data = FXCollections.observableArrayList();
+    public ObservableList<History> selectAll2() {
+        String sql = "SELECT * FROM history";
+        ObservableList<History> data = FXCollections.observableArrayList();
 
-    //     try (Connection conn = DatabaseConnection.connect();
-    //         Statement stmt = conn.createStatement();
-    //         ResultSet rs = stmt.executeQuery(sql)) {
+        try (Connection conn = DatabaseConnection.connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
             
-    //         while (rs.next()) {
-    //             History history = new History(
-    //                 rs.getDouble("nominal"),
-    //                 rs.getString("username"),
-    //                 rs.getString("email"),
-    //                 rs.getString("password")
-    //             );
-    //             data.add(history);
-    //         }
-    //     } catch (SQLException e) {
-    //         System.out.println(e.getMessage());
-    //     }
-    //     return data;
-    // }
+            while (rs.next()) {
+                History history = new History(
+                    rs.getString("yayasan"),
+                    rs.getDouble("nominal"),
+                    rs.getString("metode")
+                );
+                data.add(history);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return data;
+    }
 
     public void update(String username, String email, String password) {
         String sql = "UPDATE user SET username = ?, password = ? WHERE email = ?";
