@@ -6,6 +6,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import carefund.project.controller.CarefundController;
 import carefund.project.model.History;
+import carefund.project.model.User;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -30,6 +31,7 @@ public class App extends Application {
     private Stage primaryStage;
     private Label titleLabel = new Label("CAREFUND APP");
     private Scene homeScene, loginScene, registerScene, mainScene, donationScene, profileScene, historyScene;
+    private Label usernameDisplayLabel, emailDisplayLabel;
     CarefundController cf = new CarefundController();
 
     @Override
@@ -221,7 +223,24 @@ public class App extends Application {
         Button historyButton = new Button("History");
 
         donationButton.setOnAction(e -> primaryStage.setScene(donationScene));
-        profileButton.setOnAction(e -> primaryStage.setScene(profileScene));
+
+        profileButton.setOnAction(e -> {
+            User loggedInUser = cf.getLoggedInUser(); // Assuming this method exists
+            if (loggedInUser != null) {
+                usernameDisplayLabel.setText(loggedInUser.getUsername());
+                emailDisplayLabel.setText(loggedInUser.getEmail());
+            } else {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("No user is currently logged in.");
+                alert.showAndWait();
+                // Optionally, redirect to login scene:
+                primaryStage.setScene(loginScene);
+            }
+            primaryStage.setScene(profileScene);
+        });
+
         historyButton.setOnAction(e -> primaryStage.setScene(historyScene));
 
         donationButton.getStyleClass().add("button");
@@ -311,11 +330,30 @@ public class App extends Application {
     }
 
     private void createProfileScene() {
-        Label profileLabel = new Label("Profile Scene");
-        profileLabel.getStyleClass().add("label");
-
-        VBox layout = new VBox(20, profileLabel);
+        VBox layout = new VBox(20);
         layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(25, 25, 25, 25));
+        layout.getStyleClass().add("grid-pane");
+
+        // Labels to Display User Information
+        Label usernameLabel = new Label("Username:");
+        usernameDisplayLabel = new Label();
+        Label emailLabel = new Label("Email:");
+        emailDisplayLabel = new Label();
+
+        Button backButton = new Button("Back");
+        backButton.setOnAction(e -> primaryStage.setScene(mainScene));
+        backButton.getStyleClass().add("button");
+
+        // Style the Labels
+        usernameLabel.getStyleClass().add("label");
+        emailLabel.getStyleClass().add("label");
+        usernameDisplayLabel.getStyleClass().add("label-value");
+        emailDisplayLabel.getStyleClass().add("label-value");
+
+        // Add to layout
+        layout.getChildren().addAll(usernameLabel, usernameDisplayLabel, emailLabel, emailDisplayLabel, backButton);
+
         profileScene = new Scene(layout, 300, 250);
     }
 
