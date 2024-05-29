@@ -1,6 +1,6 @@
 /* General Styles */
 .root {
-    -fx-background-image: url(/image/Background.jpg); /* Replace with your actual path */
+    -fx-background-image: url(/image/Back.jpg); /* Replace with your actual path */
 }
 
 /* Scene Styles */
@@ -10,7 +10,7 @@
 
 /* Button Styles */
 .button {
-    -fx-padding: 14px 124px;
+    -fx-padding: 14px 224px;
     -fx-background-color: #000000;
     -fx-background-radius: 16px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 1, 0, 0, 2);
@@ -39,7 +39,7 @@
 .label {
     -fx-font-family: "Comic Sans MS";
     -fx-font-size: 17px;
-    -fx-text-fill: #333;
+    -fx-text-fill: #ffffff;
 }
 
 /* Text Field and Password Field Styles */
@@ -64,13 +64,13 @@
 /* CAREFUND App Title */
 .label-title { 
     -fx-font-family: "JejuHallasan"; 
-    -fx-font-size: 32px; 
+    -fx-font-size: 128px; 
     -fx-font-weight: normal; 
-    -fx-text-fill: #070606; 
+    -fx-text-fill: #ffffff; 
     -fx-alignment: center; 
-    -fx-padding: 10px 0; 
+    -fx-padding: 15px 0; 
     -fx-translate-x: 0px; 
-    -fx-translate-y: 0px; 
+    -fx-translate-y: -150px; 
     /* -fx-pref-width: 0px; 
     -fx-pref-height: 0px; */
 }
@@ -89,3 +89,20 @@
 .radio-button {
     -fx-font-family: "Comic Sans MS";
 }
+.history-table {
+    -fx-background-color: white;
+    -fx-table-cell-border-color: black; /* Optional, for a cleaner look */
+}
+
+.history-table .column-header {
+    -fx-background-color: #000000; /* Or any color you prefer */
+    -fx-text-fill: white;
+    -fx-font-family: "Comic Sans MS";
+}
+
+.history-table .table-cell {
+    -fx-text-fill: black;
+    -fx-font-family: "Comic Sans MS";
+    -fx-alignment: center;
+}
+

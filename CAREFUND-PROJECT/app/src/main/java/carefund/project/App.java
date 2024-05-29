@@ -1,7 +1,11 @@
 package carefund.project;
 
-import carefund.project.controller.CarefundController;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 
+import carefund.project.controller.CarefundController;
+import carefund.project.model.History;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -316,12 +320,25 @@ public class App extends Application {
     }
 
     private void createHistoryScene() {
-        Label historyLabel = new Label("History Scene");
-        historyLabel.getStyleClass().add("label");
+        TableView<History> historyTable = new TableView<>();
+        historyTable.setItems(cf.selectAll2());
 
-        VBox layout = new VBox(20, historyLabel);
+        TableColumn<History, String> yayasanCol = new TableColumn<>("Yayasan");
+        yayasanCol.setCellValueFactory(new PropertyValueFactory<>("yayasan"));
+
+        TableColumn<History, Double> nominalCol = new TableColumn<>("Nominal");
+        nominalCol.setCellValueFactory(new PropertyValueFactory<>("nominal"));
+
+        TableColumn<History, String> metodeCol = new TableColumn<>("Metode Pembayaran");
+        metodeCol.setCellValueFactory(new PropertyValueFactory<>("metode"));
+
+        historyTable.getColumns().addAll(yayasanCol, nominalCol, metodeCol);
+        historyTable.getStyleClass().add("history-table");
+
+        VBox layout = new VBox(20, historyTable);
         layout.setAlignment(Pos.CENTER);
-        historyScene = new Scene(layout, 300, 250);
+        historyScene = new Scene(layout, 0, 0);
+
     }
 
     public static void main(String[] args) {

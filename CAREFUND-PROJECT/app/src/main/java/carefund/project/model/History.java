@@ -1,7 +1,7 @@
 package carefund.project.model;
 
 public class History {
-    
+
     private double nominal;
     private String yayasan;
     private String metode;
