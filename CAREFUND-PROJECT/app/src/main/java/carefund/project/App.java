@@ -1,6 +1,7 @@
 package carefund.project;
 
 import carefund.project.controller.CarefundController;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,7 +24,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Font;
-import javafx.scene.layout.StackPane;
 
 public class App extends Application {
 
@@ -76,6 +76,7 @@ public class App extends Application {
         loginButton.setFont(comicSansFont);
         registerButton.setFont(comicSansFont);
 
+        titleLabel.getStyleClass().add("label-title");
         loginButton.getStyleClass().add("button");
         registerButton.getStyleClass().add("button");
 
@@ -319,7 +320,7 @@ public class App extends Application {
         grid.add(transferButton, 1, 2);
         grid.add(eWalletButton, 1, 3);
         grid.add(kartuKreditButton, 1, 4);
-        grid.add(backButton, 0, 6);
+        grid.add(backButton, 0, 5);
         grid.add(donateButton, 1, 5);
 
         donationScene = new Scene(grid, 400, 350);

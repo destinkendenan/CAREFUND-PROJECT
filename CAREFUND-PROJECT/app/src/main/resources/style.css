@@ -37,7 +37,8 @@
 
 /* Label Styles */
 .label {
-    -fx-font-size: 14px;
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 17px;
     -fx-text-fill: #333;
 }
 
@@ -61,17 +62,17 @@
 }
 
 /* CAREFUND App Title */
-.label { 
+.label-title { 
     -fx-font-family: "JejuHallasan"; 
-    -fx-font-size: 64px; 
+    -fx-font-size: 32px; 
     -fx-font-weight: normal; 
     -fx-text-fill: #070606; 
     -fx-alignment: center; 
-    -fx-padding: 25px 0 0 30px; 
-    -fx-translate-x: 30px; 
-    -fx-translate-y: 25px; 
-    -fx-pref-width: 0px; 
-    -fx-pref-height: 0px;
+    -fx-padding: 10px 0; 
+    -fx-translate-x: 0px; 
+    -fx-translate-y: 0px; 
+    /* -fx-pref-width: 0px; 
+    -fx-pref-height: 0px; */
 }
 
 /* ComboBox Styles */
