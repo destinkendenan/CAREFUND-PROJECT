@@ -22,10 +22,13 @@ import javafx.stage.Stage;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.text.Font;
+import javafx.scene.layout.StackPane;
 
 public class App extends Application {
 
     private Stage primaryStage;
+    private Label titleLabel = new Label("CAREFUND APP");
     private Scene homeScene, loginScene, registerScene, mainScene, donationScene, profileScene, historyScene;
     CarefundController cf = new CarefundController();
 
@@ -44,6 +47,10 @@ public class App extends Application {
 
         // Tambahkan CSS ke semua scene
         String cssPath = getClass().getResource("/style.css").toExternalForm();
+
+        Font.loadFont(getClass().getResourceAsStream("/fonts/JejuHallasan.ttf"), 64);
+        titleLabel.getStyleClass().add("carefund-app-title");
+        Font.loadFont(getClass().getResourceAsStream("/fonts/COMICSANS.ttf"), 12);
         homeScene.getStylesheets().add(cssPath);
         loginScene.getStylesheets().add(cssPath);
         registerScene.getStylesheets().add(cssPath);
@@ -63,11 +70,19 @@ public class App extends Application {
     private void createHomeScene() {
         Button loginButton = new Button("Login");
         Button registerButton = new Button("Register");
+        Label titleLabel = new Label("CAREFUND APP");
+
+        Font comicSansFont = Font.loadFont(getClass().getResourceAsStream("/fonts/COMICSANS.ttf"), 18);
+        loginButton.setFont(comicSansFont);
+        registerButton.setFont(comicSansFont);
+
+        loginButton.getStyleClass().add("button");
+        registerButton.getStyleClass().add("button");
 
         loginButton.setOnAction(e -> primaryStage.setScene(loginScene));
         registerButton.setOnAction(e -> primaryStage.setScene(registerScene));
 
-        VBox layout = new VBox(20, loginButton, registerButton);
+        VBox layout = new VBox(20, titleLabel, loginButton, registerButton);
         layout.setAlignment(Pos.CENTER);
         homeScene = new Scene(layout, 300, 250);
     }

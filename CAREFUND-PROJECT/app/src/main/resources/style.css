@@ -1,40 +1,47 @@
-/* Gaya Umum */
+/* General Styles */
 .root {
-    -fx-background-color: #f0f0f0; /* Warna latar belakang abu-abu muda */
-    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Jenis font */
+    -fx-background-image: url(/image/Background.jpg); /* Replace with your actual path */
 }
 
-/* Gaya untuk Scene */
+/* Scene Styles */
 .scene {
     -fx-padding: 20px;
 }
 
-/* Gaya untuk Tombol */
+/* Button Styles */
 .button {
-    -fx-background-color: #007bff; /* Warna biru primer */
+    -fx-padding: 14px 124px;
+    -fx-background-color: #000000;
+    -fx-background-radius: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 1, 0, 0, 2);
+    -fx-alignment: CENTER;
     -fx-text-fill: white;
-    -fx-padding: 10px 20px;
-    -fx-border: none;
-    -fx-border-radius: 5px;
-    -fx-cursor: hand;
+    -fx-font-size: 15px;
+    -fx-font-family: "Comic Sans MS";
+}
+
+.button-container {
+    -fx-alignment: CENTER;
+    -fx-pref-width: 343px;
+    -fx-pref-height: 58px;
 }
 
 .button:hover {
-    -fx-background-color: #0069d9; /* Warna biru lebih gelap saat dihover */
+    -fx-background-color: #0069d9;
 }
 
 .button:focused {
     -fx-ring-width: 2px;
-    -fx-ring-color: #0062cc; /* Warna biru lebih gelap saat fokus */
+    -fx-ring-color: #0062cc;
 }
 
-/* Gaya untuk Label */
+/* Label Styles */
 .label {
     -fx-font-size: 14px;
     -fx-text-fill: #333;
 }
 
-/* Gaya untuk TextField dan PasswordField */
+/* Text Field and Password Field Styles */
 .text-field, .password-field {
     -fx-background-color: white;
     -fx-padding: 8px;
@@ -44,11 +51,40 @@
 }
 
 .text-field:focused, .password-field:focused {
-    -fx-border-color: #007bff; /* Warna biru primer saat fokus */
+    -fx-border-color: #007bff;
 }
 
-/* Gaya untuk GridPane */
+/* GridPane Styles */
 .grid-pane {
     -fx-hgap: 10px;
     -fx-vgap: 10px;
+}
+
+/* CAREFUND App Title */
+.label { 
+    -fx-font-family: "JejuHallasan"; 
+    -fx-font-size: 64px; 
+    -fx-font-weight: normal; 
+    -fx-text-fill: #070606; 
+    -fx-alignment: center; 
+    -fx-padding: 25px 0 0 30px; 
+    -fx-translate-x: 30px; 
+    -fx-translate-y: 25px; 
+    -fx-pref-width: 0px; 
+    -fx-pref-height: 0px;
+}
+
+/* ComboBox Styles */
+.combo-box {
+    -fx-font-family: "Comic Sans MS";
+    -fx-background-color: white;
+    -fx-padding: 8px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+}
+
+/* RadioButton Styles */
+.radio-button {
+    -fx-font-family: "Comic Sans MS";
 }
