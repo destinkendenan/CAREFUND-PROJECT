@@ -144,7 +144,7 @@ public class CarefundController {
     // }
 
     public ObservableList<History> selectAll2() {
-        String sql = "SELECT * FROM history";
+        String sql = "SELECT yayasan, nominal, metode FROM history";
         ObservableList<History> data = FXCollections.observableArrayList();
 
         try (Connection conn = DatabaseConnection.connect();
@@ -155,7 +155,8 @@ public class CarefundController {
                 History history = new History(
                         rs.getString("yayasan"),
                         rs.getDouble("nominal"),
-                        rs.getString("metode"));
+                        rs.getString("metode")
+                );
                 data.add(history);
             }
         } catch (SQLException e) {
@@ -164,15 +165,15 @@ public class CarefundController {
         return data;
     }
 
-    public void update(String username, String email, String password) {
-        String sql = "UPDATE user SET username = ?, password = ? WHERE email = ?";
-        try (Connection conn = DatabaseConnection.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-            pstmt.setString(3, email);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
+    // public void update(String username, String email, String password) {
+    //     String sql = "UPDATE user SET username = ?, password = ? WHERE email = ?";
+    //     try (Connection conn = DatabaseConnection.connect();
+    //             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    //         pstmt.setString(1, username);
+    //         pstmt.setString(2, password);
+    //         pstmt.setString(3, email);
+    //     } catch (SQLException e) {
+    //         System.out.println(e.getMessage());
+    //     }
+    // }
 }

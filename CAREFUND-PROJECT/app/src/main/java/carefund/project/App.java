@@ -8,6 +8,8 @@ import carefund.project.controller.CarefundController;
 import carefund.project.model.History;
 import carefund.project.model.User;
 import javafx.application.Application;
+import javafx.beans.binding.DoubleBinding;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -17,12 +19,14 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Font;
 
@@ -33,6 +37,8 @@ public class App extends Application {
     private Scene homeScene, loginScene, registerScene, mainScene, donationScene, profileScene, historyScene;
     private Label usernameDisplayLabel, emailDisplayLabel;
     CarefundController cf = new CarefundController();
+    ObservableList<History> historyData;
+    TableView<History> historyTable;
 
     @Override
     public void start(Stage primaryStage) {
@@ -293,6 +299,7 @@ public class App extends Application {
             // logika untuk donation confirmation (call a controller method, display
             // confirmation alert)
             cf.donate(yayasan, nominal, metode);
+            loadData();
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Donasi Berhasil");
             alert.setHeaderText(null);
@@ -358,25 +365,55 @@ public class App extends Application {
     }
 
     private void createHistoryScene() {
-        TableView<History> historyTable = new TableView<>();
-        historyTable.setItems(cf.selectAll2());
+        Label title = new Label("Riwayat Donasi");
+        title.setAlignment(Pos.CENTER);
+        title.setStyle("-fx-font-family: Comic Sans MS; -fx-font-size: 25px; -fx-text-fill: #000000");
 
+        Button back = new Button("Back");
+        back.setOnAction(e -> primaryStage.setScene(mainScene));
+        back.getStyleClass().addAll("back-button");
+        
         TableColumn<History, String> yayasanCol = new TableColumn<>("Yayasan");
         yayasanCol.setCellValueFactory(new PropertyValueFactory<>("yayasan"));
-
         TableColumn<History, Double> nominalCol = new TableColumn<>("Nominal");
         nominalCol.setCellValueFactory(new PropertyValueFactory<>("nominal"));
-
         TableColumn<History, String> metodeCol = new TableColumn<>("Metode Pembayaran");
         metodeCol.setCellValueFactory(new PropertyValueFactory<>("metode"));
-
-        historyTable.getColumns().addAll(yayasanCol, nominalCol, metodeCol);
+        
+        historyTable = new TableView<>();
+        historyTable.getColumns().add(yayasanCol);
+        historyTable.getColumns().add(nominalCol);
+        historyTable.getColumns().add(metodeCol);
         historyTable.getStyleClass().add("history-table");
 
-        VBox layout = new VBox(20, historyTable);
-        layout.setAlignment(Pos.CENTER);
-        historyScene = new Scene(layout, 0, 0);
+        DoubleBinding columnwidth = historyTable.widthProperty().divide(3);
+        yayasanCol.prefWidthProperty().bind(columnwidth);
+        nominalCol.prefWidthProperty().bind(columnwidth);
+        metodeCol.prefWidthProperty().bind(columnwidth);
 
+        historyTable.setPrefHeight(900);
+
+        VBox layout = new VBox(10, title, historyTable);
+        layout.setAlignment(Pos.CENTER);
+        layout.setPadding(new Insets(20));
+
+        ScrollPane scrollPane = new ScrollPane(layout);
+        scrollPane.setFitToWidth(true);
+
+        BorderPane mainLayout = new BorderPane();
+        mainLayout.setTop(back);
+        mainLayout.setCenter(scrollPane);
+
+        BorderPane.setAlignment(back, Pos.TOP_LEFT);
+        BorderPane.setMargin(back, new Insets(10));
+
+        loadData();
+        historyScene = new Scene(mainLayout, 600, 900);
+    }
+
+    private void loadData() {
+        ObservableList<History> history = cf.selectAll2();
+        historyTable.setItems(history);
     }
 
     public static void main(String[] args) {
