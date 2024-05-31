@@ -3,6 +3,7 @@ package salinanproject.carefund.controller;
 import salinanproject.carefund.config.DatabaseConnection;
 import salinanproject.carefund.model.History;
 import salinanproject.carefund.model.User;
+import salinanproject.carefund.model.UserProfile;
 // import carefund.project.model.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -91,6 +92,14 @@ public class CarefundController {
         }
     }
 
+    // public static User getUserProfile(String username) {
+    //     String sql = "SELECT username, email FROM user WHERE username =?";
+    //     try (Connection conn = DatabaseConnection.connect();
+    //             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    //         pstmt.setString(1, username);
+    //         ResultSet rs = pstmt.executeQuery();
+    // }
+
     public void register(String username, String email, String password) {
         createUserTable();
         String sql = "INSERT INTO user(username, email, password) VALUES(?, ?, ?)";
@@ -121,21 +130,20 @@ public class CarefundController {
         }
     }
 
-    public ObservableList<User> selectAll() {
-    String sql = "SELECT username, email, password FROM user";
-    ObservableList<User> data = FXCollections.observableArrayList();
+    public ObservableList<UserProfile> selectAll() {
+    String sql = "SELECT username, email FROM user";
+    ObservableList<UserProfile> data = FXCollections.observableArrayList();
 
     try (Connection conn = DatabaseConnection.connect();
     Statement stmt = conn.createStatement();
     ResultSet rs = stmt.executeQuery(sql)) {
 
     while (rs.next()) {
-    User user = new User(
-    rs.getString("username"),
-    rs.getString("email"),
-    rs.getString("password")
-    );
-    data.add(user);
+        UserProfile user = new UserProfile(
+            rs.getString("username"),
+            rs.getString("email")
+        );
+        data.add(user);
     }
     } catch (SQLException e) {
     System.out.println(e.getMessage());
@@ -164,6 +172,8 @@ public class CarefundController {
         }
         return data;
     }
+
+    
 
     // public void update(String username, String email, String password) {
     //     String sql = "UPDATE user SET username = ?, password = ? WHERE email = ?";

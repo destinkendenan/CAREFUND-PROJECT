@@ -42,15 +42,16 @@ public class MainScene extends Parent  {
             if (loggedInUser != null) {
                 usernameDisplayLabel.setText(loggedInUser.getUsername());
                 emailDisplayLabel.setText(loggedInUser.getEmail());
-            } else {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText(null);
-                alert.setContentText("No user is currently logged in.");
-                alert.showAndWait();
-                // Optionally, redirect to login scene:
-                primaryStage.setScene(loginScene);
-            }
+            } 
+            // else {
+            //     Alert alert = new Alert(AlertType.ERROR);
+            //     alert.setTitle("Error");
+            //     alert.setHeaderText(null);
+            //     alert.setContentText("No user is currently logged in.");
+            //     alert.showAndWait();
+            //     // Optionally, redirect to login scene:
+            //     primaryStage.setScene(loginScene);
+            // }
             primaryStage.setScene(profileScene);
         });
 

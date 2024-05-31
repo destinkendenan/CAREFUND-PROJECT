@@ -34,9 +34,6 @@ public class LoginScene extends Parent {
         loginButton.getStyleClass().add("button");
         backButton.getStyleClass().add("button");
 
-        // homeScene = new HomeScene(primaryStage).createScene();
-        
-
         backButton.setOnAction(e -> {
             HomeScene home = new HomeScene(primaryStage);
                 homeScene = home.createScene();

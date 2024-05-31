@@ -7,6 +7,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import salinanproject.carefund.controller.CarefundController;
 import salinanproject.carefund.model.History;
+import salinanproject.carefund.model.UserProfile;
 
 public abstract class Parent {
     protected Stage primaryStage;
@@ -22,5 +23,16 @@ public abstract class Parent {
         historyTable.setItems(history);
     }
 
+    void loadUserData() {
+        ObservableList<UserProfile> users = cf.selectAll();
+        if (!users.isEmpty()) {
+            UserProfile user = users.get(0);
+            usernameDisplayLabel.setText(user.getUsername());
+            emailDisplayLabel.setText(user.getEmail());
+        } else {
+            usernameDisplayLabel.setText("No user found");
+            emailDisplayLabel.setText("No email found");
+        }
+    }
 
 } 

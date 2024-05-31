@@ -50,6 +50,7 @@ public class ProfileScene extends Parent {
         // Add to layout
         layout.getChildren().addAll(usernameLabel, usernameDisplayLabel, emailLabel, emailDisplayLabel, backButton);
 
+        loadUserData();
         profileScene = new Scene(layout, 300, 250);
         return profileScene;
     }
