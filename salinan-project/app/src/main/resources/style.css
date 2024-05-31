@@ -10,8 +10,11 @@
 
 /* Button Styles */
 .button {
-    -fx-padding: 14px 224px;
+    -fx-padding: 14px 64px;
     -fx-background-color: #000000;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 1px;
+    -fx-border-radius: 16px;
     -fx-background-radius: 16px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 1, 0, 0, 2);
     -fx-alignment: CENTER;
@@ -100,6 +103,7 @@
 
 .radio-button {
     -fx-font-family: "Comic Sans MS";
+    -fx-text-fill : white;
 }
 .history-table {
     -fx-background-color: white;
@@ -118,3 +122,78 @@
     -fx-alignment: center;
 }
 
+.navigation {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #000000;
+    -fx-border-width: 0 0 1 0; /* Set border only at the bottom */
+    -fx-padding: 5px; /* Padding for the navigation bar */
+}
+
+.items {
+    -fx-spacing: 20px; /* Spacing between items */
+}
+
+/* Style for labels acting as buttons */
+.button {
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #ddd; /* Change background color on hover */
+}
+
+.carefund {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.logout {
+    -fx-text-fill: rgb(179, 30, 30); /* Color of logout label */
+}
+
+/* Styling for the logo image */
+.carefund > .label {
+    -fx-padding: 0 10px; /* Adjust padding as needed */
+}
+
+/* Styling for labels in the items box */
+.donation, .history, .profile {
+    -fx-text-fill: #ffffff; /* Color of label text */
+    -fx-font-size: 16px;
+}
+
+.welcome-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+.logo {
+    -fx-padding: 0 0px; /* Padding around the logo */
+}
+
+.logo > .image {
+    -fx-padding: 0; /* Remove padding from the image */
+    -fx-fit-height: 5px; /* Set height of the logo */
+    -fx-fit-width: 5px; /* Let width adjust automatically */
+}
+.welcome-label {
+    -fx-font-family: 'Inter';
+    -fx-font-weight: bold;
+    -fx-font-size: 72px;
+    -fx-text-fill: #FFFFFF;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0, 0, 0); /* Shadow effect */
+    -fx-translate-y: 0px;
+}
+/* Quote Label */
+.quote-label {
+    -fx-font-family: 'Inter'; /* Font family */
+    -fx-font-size: 14px; /* Ukuran font */
+    -fx-text-fill: #ffffff; /* Warna teks */
+    -fx-alignment: center; /* Posisi teks */
+    -fx-padding: 0px; /* Padding */
+}
+.background {
+    -fx-background-color: white;
+    -fx-background-insets: 20;
+    -fx-padding: 10px; /* Padding untuk background putih kecil */
+}

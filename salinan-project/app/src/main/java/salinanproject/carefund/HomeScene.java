@@ -8,13 +8,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class HomeScene extends Parent{
+public class HomeScene extends Parent {
 
-
-    protected HomeScene(Stage stage){
+    public HomeScene(Stage stage) {
         this.primaryStage = stage;
     }
 
+    @Override
     protected Scene createScene() {
         Button loginButton = new Button("Login");
         Button registerButton = new Button("Register");

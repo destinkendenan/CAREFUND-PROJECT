@@ -1,5 +1,3 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic",
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "CodeGPT.apiKey": "OpenAI"
+    "java.compile.nullAnalysis.mode": "automatic"
 }

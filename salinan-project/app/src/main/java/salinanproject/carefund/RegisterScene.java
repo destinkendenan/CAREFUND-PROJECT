@@ -12,7 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class RegisterScene extends Parent  {
+public class RegisterScene extends Parent {
 
     protected RegisterScene(Stage stage) {
         this.primaryStage = stage;
@@ -40,16 +40,15 @@ public class RegisterScene extends Parent  {
 
         backButton.setOnAction(e -> {
             HomeScene home = new HomeScene(primaryStage);
-                homeScene = home.createScene();
-                String cssPath = getClass().getResource("/style.css").toExternalForm();
+            homeScene = home.createScene();
+            String cssPath = getClass().getResource("/style.css").toExternalForm();
 
-                Font.loadFont(getClass().getResourceAsStream("/fonts/JejuHallasan.ttf"), 64);
-            
-                Font.loadFont(getClass().getResourceAsStream("/fonts/COMICSANS.ttf"), 12);
-                homeScene.getStylesheets().add(cssPath);
-                primaryStage.setScene(homeScene);
+            Font.loadFont(getClass().getResourceAsStream("/fonts/JejuHallasan.ttf"), 64);
+
+            Font.loadFont(getClass().getResourceAsStream("/fonts/COMICSANS.ttf"), 12);
+            homeScene.getStylesheets().add(cssPath);
+            primaryStage.setScene(homeScene);
         });
-
 
         registerButton.setOnAction(e -> {
             String username = usernameField.getText();
@@ -87,11 +86,11 @@ public class RegisterScene extends Parent  {
             String cssPath = getClass().getResource("/style.css").toExternalForm();
 
             Font.loadFont(getClass().getResourceAsStream("/fonts/JejuHallasan.ttf"), 64);
-        
+
             Font.loadFont(getClass().getResourceAsStream("/fonts/COMICSANS.ttf"), 12);
             loginScene.getStylesheets().add(cssPath);
             primaryStage.setScene(loginScene);
-            
+
         });
 
         GridPane grid = new GridPane();
