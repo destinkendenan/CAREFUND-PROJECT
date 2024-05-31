@@ -17,7 +17,7 @@ public class MainScene extends Parent {
     @Override
     protected Scene createScene() {
         donationScene = new DonationScene(primaryStage).createScene();
-        profileScene = new ProfileScene(primaryStage, mainScene).createScene();
+        profileScene = new ProfileScene(primaryStage).createScene();
 
         historyScene = new HistoryScene(primaryStage).createScene();
 
@@ -32,7 +32,7 @@ public class MainScene extends Parent {
         historyScene.getStylesheets().add(cssPath);
 
         BorderPane root = new BorderPane();
-        root.setTop(new NavigationBar(primaryStage, mainScene, donationScene, profileScene, historyScene)
+        root.setTop(new NavigationBar(primaryStage, homeScene, mainScene, donationScene, profileScene, historyScene)
                 .createNavigationBar());
 
         // Tambahkan label "Welcome"
@@ -46,7 +46,7 @@ public class MainScene extends Parent {
                 "Jangan pernah merasa malu ketika hanya mampu memberi sedikit untuk bersedekah, karena selalu ada kebaikan dalam berbagi, tidak peduli seberapa kecil yang kamu berikan.");
         quoteLabel.getStyleClass().add("quote-label");
         BorderPane.setAlignment(quoteLabel, Pos.CENTER);
-        BorderPane.setMargin(quoteLabel, new Insets(20, 0, 0, 0)); // Atur margin atas
+        BorderPane.setMargin(quoteLabel, new Insets(20, 20, 20, 20)); // Atur margin atas
         root.setBottom(quoteLabel);
 
         mainScene = new Scene(root, 800, 600);

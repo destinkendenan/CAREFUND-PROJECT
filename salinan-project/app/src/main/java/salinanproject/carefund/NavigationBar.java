@@ -8,15 +8,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class NavigationBar {
     private Stage primaryStage;
-    private Scene mainScene, donationScene, profileScene, historyScene;
+    private Scene homeScene, mainScene, donationScene, profileScene, historyScene;
 
-    public NavigationBar(Stage primaryStage, Scene mainScene, Scene donationScene, Scene profileScene,
+    public NavigationBar(Stage primaryStage, Scene homeScene, Scene mainScene, Scene donationScene, Scene profileScene,
             Scene historyScene) {
         this.primaryStage = primaryStage;
+        this.homeScene = homeScene;
         this.mainScene = mainScene;
         this.donationScene = donationScene;
         this.profileScene = profileScene;
@@ -45,15 +47,33 @@ public class NavigationBar {
 
         Label donationLabel = new Label("Donation");
         donationLabel.getStyleClass().addAll("donation", "button");
-        donationLabel.setOnMouseClicked(e -> primaryStage.setScene(donationScene));
+        donationLabel.setOnMouseClicked(e -> {
+            DonationScene donation = new DonationScene(primaryStage);
+            donationScene = donation.createScene();
+            primaryStage.setScene(donationScene); // Mengarahkan ke donationScene saat logout
+            String cssPath = getClass().getResource("/style.css").toExternalForm();
+            donationScene.getStylesheets().add(cssPath);
+        });
 
         Label historyLabel = new Label("History");
         historyLabel.getStyleClass().addAll("history", "button");
-        historyLabel.setOnMouseClicked(e -> primaryStage.setScene(historyScene));
+        historyLabel.setOnMouseClicked(e -> {
+            HistoryScene history = new HistoryScene(primaryStage);
+            historyScene = history.createScene();
+            primaryStage.setScene(historyScene); // Mengarahkan ke historyScene saat logout
+            String cssPath = getClass().getResource("/style.css").toExternalForm();
+            historyScene.getStylesheets().add(cssPath);
+        });
 
         Label profileLabel = new Label("Profile");
         profileLabel.getStyleClass().addAll("profile", "button");
-        profileLabel.setOnMouseClicked(e -> primaryStage.setScene(profileScene));
+        profileLabel.setOnMouseClicked(e -> {
+            ProfileScene profile = new ProfileScene(primaryStage);
+            profileScene = profile.createScene();
+            primaryStage.setScene(profileScene); // Mengarahkan ke profileScene saat logout
+            String cssPath = getClass().getResource("/style.css").toExternalForm();
+            profileScene.getStylesheets().add(cssPath);
+        });
 
         HBox logoutBox = new HBox();
         logoutBox.setAlignment(Pos.CENTER_RIGHT);
@@ -70,7 +90,11 @@ public class NavigationBar {
         Label logoutLabel = new Label("Logout");
         logoutLabel.getStyleClass().addAll("logout", "button");
         logoutLabel.setOnMouseClicked(e -> {
-            primaryStage.setScene(mainScene); // Mengarahkan ke homescene saat logout
+            HomeScene home = new HomeScene(primaryStage);
+            homeScene = home.createScene();
+            primaryStage.setScene(homeScene); // Mengarahkan ke homescene saat logout
+            String cssPath = getClass().getResource("/style.css").toExternalForm();
+            homeScene.getStylesheets().add(cssPath);
             System.out.println("Logged out!");
         });
         return logoutLabel;

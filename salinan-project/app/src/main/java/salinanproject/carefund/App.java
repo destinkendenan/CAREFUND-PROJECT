@@ -22,7 +22,7 @@ public class App extends Application {
         RegisterScene regis = new RegisterScene(primaryStage);
         MainScene main = new MainScene(primaryStage);
         DonationScene donation = new DonationScene(primaryStage);
-        profileScene = new ProfileScene(primaryStage, mainScene).createScene();
+        profileScene = new ProfileScene(primaryStage).createScene();
 
         HistoryScene history = new HistoryScene(primaryStage);
 
@@ -31,7 +31,7 @@ public class App extends Application {
         registerScene = regis.createScene();
         mainScene = main.createScene();
         donationScene = donation.createScene();
-        profileScene = new ProfileScene(primaryStage, mainScene).createScene();
+        profileScene = new ProfileScene(primaryStage).createScene();
 
         historyScene = history.createScene();
 

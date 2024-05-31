@@ -24,7 +24,7 @@ public class DonationScene extends Parent {
 
     protected Scene createScene() {
         // Create NavigationBar
-        NavigationBar navigationBar = new NavigationBar(primaryStage, mainScene, donationScene, profileScene,
+        NavigationBar navigationBar = new NavigationBar(primaryStage, homeScene,  mainScene, donationScene, profileScene,
                 historyScene);
         HBox navigationBarBox = navigationBar.createNavigationBar();
 

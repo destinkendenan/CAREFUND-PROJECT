@@ -92,14 +92,6 @@ public class CarefundController {
         }
     }
 
-    // public static User getUserProfile(String username) {
-    //     String sql = "SELECT username, email FROM user WHERE username =?";
-    //     try (Connection conn = DatabaseConnection.connect();
-    //             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-    //         pstmt.setString(1, username);
-    //         ResultSet rs = pstmt.executeQuery();
-    // }
-
     public void register(String username, String email, String password) {
         createUserTable();
         String sql = "INSERT INTO user(username, email, password) VALUES(?, ?, ?)";

@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import salinanproject.carefund.config.DatabaseConnection;
+import salinanproject.carefund.model.UserProfile;
 
 public class LoginScene extends Parent {
 
@@ -36,14 +38,14 @@ public class LoginScene extends Parent {
 
         backButton.setOnAction(e -> {
             HomeScene home = new HomeScene(primaryStage);
-                homeScene = home.createScene();
-                String cssPath = getClass().getResource("/style.css").toExternalForm();
+            homeScene = home.createScene();
+            String cssPath = getClass().getResource("/style.css").toExternalForm();
 
-                Font.loadFont(getClass().getResourceAsStream("/fonts/JejuHallasan.ttf"), 64);
-            
-                Font.loadFont(getClass().getResourceAsStream("/fonts/COMICSANS.ttf"), 12);
-                homeScene.getStylesheets().add(cssPath);
-                primaryStage.setScene(homeScene);
+            Font.loadFont(getClass().getResourceAsStream("/fonts/JejuHallasan.ttf"), 64);
+        
+            Font.loadFont(getClass().getResourceAsStream("/fonts/COMICSANS.ttf"), 12);
+            homeScene.getStylesheets().add(cssPath);
+            primaryStage.setScene(homeScene);
         });
 
         // Logika validasi login
@@ -52,16 +54,26 @@ public class LoginScene extends Parent {
             String password = passwordField.getText();
 
             if (cf.login(username, password)) {
+                String email = DatabaseConnection.getEmailByUsername(username);
+                if (email != null) {
+                    UserProfile loggedInUser = new UserProfile(username, email);
+                    UserSession.getInstance().setUser(loggedInUser);
+                    MainScene main = new MainScene(primaryStage);
+                    mainScene = main.createScene();
+                    String cssPath = getClass().getResource("/style.css").toExternalForm();
+    
+                    Font.loadFont(getClass().getResourceAsStream("/fonts/JejuHallasan.ttf"), 64);
+                    Font.loadFont(getClass().getResourceAsStream("/fonts/COMICSANS.ttf"), 12);
+                    mainScene.getStylesheets().add(cssPath);
+                    primaryStage.setScene(mainScene); // Arahkan ke mainScene jika login valid
+                } else {
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("Login Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Email not found");
+                    alert.showAndWait();
+                }
             
-                MainScene main = new MainScene(primaryStage);
-                mainScene = main.createScene();
-                String cssPath = getClass().getResource("/style.css").toExternalForm();
-
-                Font.loadFont(getClass().getResourceAsStream("/fonts/JejuHallasan.ttf"), 64);
-            
-                Font.loadFont(getClass().getResourceAsStream("/fonts/COMICSANS.ttf"), 12);
-                mainScene.getStylesheets().add(cssPath);
-                primaryStage.setScene(mainScene); // Arahkan ke mainScene jika login valid
             } else {
                 // Tampilkan pesan error (misalnya, menggunakan Alert)
                 Alert alert = new Alert(AlertType.ERROR);

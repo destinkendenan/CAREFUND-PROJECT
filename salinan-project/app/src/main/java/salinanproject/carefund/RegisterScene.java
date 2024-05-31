@@ -80,7 +80,10 @@ public class RegisterScene extends Parent {
                 alert.showAndWait();
                 return;
             }
-            cf.register(usernameField.getText(), emailField.getText(), passwordField.getText());
+            cf.register(username, email, password);
+
+            UserSession.getInstance().setEmail(email);
+
             LoginScene login = new LoginScene(primaryStage);
             loginScene = login.createScene();
             String cssPath = getClass().getResource("/style.css").toExternalForm();

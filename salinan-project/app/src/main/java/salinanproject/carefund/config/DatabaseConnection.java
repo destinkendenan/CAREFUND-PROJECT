@@ -2,6 +2,8 @@ package salinanproject.carefund.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
@@ -16,5 +18,23 @@ public class DatabaseConnection {
             System.out.println(e.getMessage());
         }
         return conn;
+    }
+
+    public static String getEmailByUsername(String username) {
+        String email = null;
+        String sql = "SELECT email FROM user WHERE username = ?";
+
+        try (Connection conn = connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                email = rs.getString("email");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return email;
     }
 }
